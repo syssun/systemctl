@@ -61,7 +61,16 @@ public class Ctl {
         }
         return "1";
     }
-
+    //取消关机命令
+    @GetMapping("/canceshutdow")
+    public String canceshutdown(){
+        try {
+            Runtime.getRuntime().exec("shutdown -a");
+        } catch (Exception e) {
+            return "0";
+        }
+        return "1";
+    }
 
     @GetMapping("/taskmgr")
     public String taskmgr(){
