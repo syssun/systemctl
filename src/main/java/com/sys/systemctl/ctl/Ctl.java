@@ -10,13 +10,13 @@ import java.io.IOException;
 @RequestMapping("/ctl")
 public class Ctl {
 
-
     //锁屏
     @GetMapping("/lockscreen")
     public String lockScreen(){
         try {
+            Thread.sleep(60000);
             Runtime.getRuntime().exec("rundll32.exe user32.dll LockWorkStation");
-        } catch (IOException e) {
+        } catch (Exception e) {
             return "0";
         }
         return "1";
@@ -31,12 +31,13 @@ public class Ctl {
         }
         return "1";
     }
-    //15s 关机
+    //60s 关机
     @GetMapping("/rononce")
     public String rononce(){
         try {
-            Runtime.getRuntime().exec("rononce -p");
-        } catch (IOException e) {
+            Thread.sleep(70000);
+            Runtime.getRuntime().exec("shutdown -s -t 60");
+        } catch (Exception e) {
             return "0";
         }
         return "1";
