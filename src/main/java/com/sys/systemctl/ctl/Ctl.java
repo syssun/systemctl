@@ -32,16 +32,37 @@ public class Ctl {
         return "1";
     }
     //60s 关机
-    @GetMapping("/rononce")
-    public String rononce(){
+    @GetMapping("/shutdown")
+    public String shutdown(){
         try {
-            Thread.sleep(70000);
             Runtime.getRuntime().exec("shutdown -s -t 60");
         } catch (Exception e) {
             return "0";
         }
         return "1";
     }
+    //10min 关机
+    @GetMapping("/shutdownten")
+    public String shutdownten(){
+        try {
+            Runtime.getRuntime().exec("shutdown -s -t 600");
+        } catch (Exception e) {
+            return "0";
+        }
+        return "1";
+    }
+    //立即关机
+    @GetMapping("/shutdownnow")
+    public String rononce(){
+        try {
+            Runtime.getRuntime().exec("shutdown -s -f");
+        } catch (Exception e) {
+            return "0";
+        }
+        return "1";
+    }
+
+
     @GetMapping("/taskmgr")
     public String taskmgr(){
         try {
@@ -51,9 +72,46 @@ public class Ctl {
         }
         return "1";
     }
-
-
-
+ // qq D:\qq\qq安装文件\Bin\qq.exe
+ @GetMapping("/openqq")
+ public String openqq(){
+     try {
+         Runtime.getRuntime().exec("D:\\qq\\qq安装文件\\Bin\\qq.exe");
+     } catch (IOException e) {
+         return "0";
+     }
+     return "1";
+ }
+ // close qq  taskkill /f /im qq.exe
+ @GetMapping("/closeqq")
+ public String closeqq(){
+     try {
+         Runtime.getRuntime().exec("taskkill /f /im qq.exe");
+     } catch (IOException e) {
+         return "0";
+     }
+     return "1";
+ }
+// D:\微信\WeChat\wechat.exe
+@GetMapping("/openwechat")
+public String openwechat(){
+    try {
+        Runtime.getRuntime().exec("D:\\微信\\WeChat\\wechat.exe");
+    } catch (IOException e) {
+        return "0";
+    }
+    return "1";
+}
+//
+@GetMapping("/closewechat")
+public String closeWechat(){
+    try {
+        Runtime.getRuntime().exec("taskkill /f /im wechat.exe");
+    } catch (IOException e) {
+        return "0";
+    }
+    return "1";
+}
 
 
 }
