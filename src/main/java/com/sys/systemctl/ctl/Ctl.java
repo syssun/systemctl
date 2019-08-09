@@ -4,23 +4,48 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 @RestController
 @RequestMapping("/ctl")
 public class Ctl {
-
     //锁屏
     @GetMapping("/lockscreen")
     public String lockScreen(){
         try {
-            Thread.sleep(60000);
             Runtime.getRuntime().exec("rundll32.exe user32.dll LockWorkStation");
         } catch (Exception e) {
             return "0";
         }
         return "1";
     }
+    //un锁屏
+    @GetMapping("/unlockscreen")
+    public String unlockScreen(){
+        try {
+            Robot rb = new Robot();
+            rbPressAndReles(rb,KeyEvent.VK_ENTER);
+            rb.delay(2000);
+            rbPressAndReles(rb,KeyEvent.VK_1);
+            rbPressAndReles(rb,KeyEvent.VK_2);
+            rbPressAndReles(rb,KeyEvent.VK_3);
+            rbPressAndReles(rb,KeyEvent.VK_4);
+            rbPressAndReles(rb,KeyEvent.VK_5);
+            rbPressAndReles(rb,KeyEvent.VK_6);
+            rbPressAndReles(rb,KeyEvent.VK_S);
+            rbPressAndReles(rb,KeyEvent.VK_Y);
+            rbPressAndReles(rb,KeyEvent.VK_S);
+            rbPressAndReles(rb,KeyEvent.VK_ENTER);
+        } catch (Exception e) {
+            return "0";
+        }
+        return "1";
+    }
+
+
+
     //计算器
     @GetMapping("/calc")
     public String calc(){
@@ -75,8 +100,11 @@ public class Ctl {
     @GetMapping("/taskmgr")
     public String taskmgr(){
         try {
-            Runtime.getRuntime().exec("taskmgr");
+            Runtime.getRuntime().exec("cmd /c taskmgr");
         } catch (IOException e) {
+            e.getStackTrace();
+e.printStackTrace();
+            System.out.println(e.getMessage());
             return "0";
         }
         return "1";
@@ -85,8 +113,19 @@ public class Ctl {
  @GetMapping("/openqq")
  public String openqq(){
      try {
+         Robot rb = new Robot();
          Runtime.getRuntime().exec("D:\\qq\\qq安装文件\\Bin\\qq.exe");
-     } catch (IOException e) {
+         rb.delay(2000);
+         rbPressAndReles(rb,KeyEvent.VK_S);
+         rbPressAndReles(rb,KeyEvent.VK_Y);
+         rbPressAndReles(rb,KeyEvent.VK_S);
+         rbPressAndReles(rb,KeyEvent.VK_8);
+         rbPressAndReles(rb,KeyEvent.VK_5);
+         rbPressAndReles(rb,KeyEvent.VK_7);
+         rbPressAndReles(rb,KeyEvent.VK_8);
+         rbPressAndReles(rb,KeyEvent.VK_5);
+
+     } catch (Exception e) {
          return "0";
      }
      return "1";
@@ -105,8 +144,13 @@ public class Ctl {
 @GetMapping("/openwechat")
 public String openwechat(){
     try {
+        Robot rb = new Robot();
         Runtime.getRuntime().exec("D:\\微信\\WeChat\\wechat.exe");
-    } catch (IOException e) {
+        rb.delay(2000);
+        rb.keyPress(KeyEvent.VK_ENTER);//回车事件
+        rb.keyRelease(KeyEvent.VK_ENTER);
+    } catch (Exception e) {
+        e.printStackTrace();
         return "0";
     }
     return "1";
@@ -122,5 +166,9 @@ public String closeWechat(){
     return "1";
 }
 
-
+    public void rbPressAndReles(Robot rb,int code){
+        rb.keyPress(code);
+        rb.keyRelease(code);
+        rb.delay(500);
+    }
 }
