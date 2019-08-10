@@ -124,6 +124,8 @@ e.printStackTrace();
          rbPressAndReles(rb,KeyEvent.VK_7);
          rbPressAndReles(rb,KeyEvent.VK_8);
          rbPressAndReles(rb,KeyEvent.VK_5);
+         rbPressAndReles(rb,KeyEvent.VK_7);
+         rbPressAndReles(rb,KeyEvent.VK_ENTER);
 
      } catch (Exception e) {
          return "0";
