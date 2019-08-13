@@ -167,6 +167,29 @@ public String closeWechat(){
     }
     return "1";
 }
+//系统睡眠
+    @GetMapping("/seleep")
+    public String seleep(){
+        try {
+            Runtime.getRuntime().exec("rundll32.exe powrprof.dll,SetSuspendState 0,1,0");
+        } catch (IOException e) {
+            return "0";
+        }
+        return "1";
+    }
+    //自定义命令
+    @GetMapping("/autoctl")
+    public String autoctl(String ctl){
+        try {
+            Runtime.getRuntime().exec("cmd /c "+ctl);
+        } catch (IOException e) {
+            return "0";
+        }
+        return "1";
+    }
+
+
+
 
     public void rbPressAndReles(Robot rb,int code){
         rb.keyPress(code);
