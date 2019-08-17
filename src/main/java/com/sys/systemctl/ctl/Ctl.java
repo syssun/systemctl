@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.net.URLEncoder;
 
 @RestController
 @RequestMapping("/ctl")
@@ -181,8 +182,10 @@ public String closeWechat(){
     @GetMapping("/autoctl")
     public String autoctl(String ctl){
         try {
-            Runtime.getRuntime().exec("cmd /c "+ctl);
-        } catch (IOException e) {
+            String s = "\"";
+            Runtime.getRuntime().exec("cmd /c \""+ctl+"\"");
+        } catch (Exception e) {
+            e.printStackTrace();
             return "0";
         }
         return "1";
