@@ -1,5 +1,7 @@
 package com.sys.systemctl.ctl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +14,8 @@ import java.net.URLEncoder;
 @RestController
 @RequestMapping("/ctl")
 public class Ctl {
+    @Autowired
+    private KafkaTemplate<String,Object> kafkaTemplate;
     //锁屏
     @GetMapping("/lockscreen")
     public String lockScreen(){
@@ -116,7 +120,7 @@ e.printStackTrace();
      try {
          Robot rb = new Robot();
          Runtime.getRuntime().exec("D:\\qq\\qq安装文件\\Bin\\qq.exe");
-         rb.delay(2000);
+         rb.delay(10000);
          rbPressAndReles(rb,KeyEvent.VK_S);
          rbPressAndReles(rb,KeyEvent.VK_Y);
          rbPressAndReles(rb,KeyEvent.VK_S);
@@ -197,6 +201,6 @@ public String closeWechat(){
     public void rbPressAndReles(Robot rb,int code){
         rb.keyPress(code);
         rb.keyRelease(code);
-        rb.delay(500);
+        rb.delay(2000);
     }
 }
