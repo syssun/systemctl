@@ -19,11 +19,7 @@ public class Ctl {
     //锁屏
     @GetMapping("/lockscreen")
     public String lockScreen(){
-        try {
-            Runtime.getRuntime().exec("rundll32.exe user32.dll LockWorkStation");
-        } catch (Exception e) {
-            return "0";
-        }
+        kafkaTemplate.send("lockscreenTopic","open");
         return "1";
     }
     //un锁屏

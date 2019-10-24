@@ -18,8 +18,14 @@ public class ConsumerListener {
     @KafkaListener(topics = "lockscreenTopic")
     public void onMessage(String message){
         String str = CtlUtils.lockScreen();// 执行指令 0 1
-        System.out.println(message); //发送执行结果
-        kafkaTemplate.send("lockscreenTopic_res",str); //发送执行结果
+        System.out.println("***********************");
+        System.out.println(message);
+        kafkaTemplate.send("lockscreenTopicRes",str); //发送执行结果
     }
-
+    //接受到指令
+    @KafkaListener(topics = "lockscreenTopicRes")
+    public void lockscreenTopicRes(String message){
+        System.out.println("***********************");
+        System.out.println(message);
+    }
 }
