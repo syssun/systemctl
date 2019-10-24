@@ -150,7 +150,7 @@ public class CtlUtils {
         return "1";
     }
     //系统睡眠
-    public String seleep(){
+    public static String seleep(){
         try {
             Runtime.getRuntime().exec("rundll32.exe powrprof.dll,SetSuspendState 0,1,0");
         } catch (IOException e) {
@@ -168,7 +168,6 @@ public class CtlUtils {
         }
         return "1";
     }
-
 
 
 
