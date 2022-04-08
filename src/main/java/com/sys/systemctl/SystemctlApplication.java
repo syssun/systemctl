@@ -11,7 +11,6 @@ public class SystemctlApplication {
 
     public static void main(String[] args) {
         SpringApplicationBuilder builder = new SpringApplicationBuilder(SystemctlApplication.class);
-        //SpringApplication.run(SystemctlApplication.class, args);
         builder.headless(false)
                // .web(WebApplicationType.NONE)
                // .bannerMode(Banner.Mode.OFF)
