@@ -26,7 +26,7 @@ logging:
 rocketmq:
   producer:
     groupName: SYSCTLGROUPNAME
-    namesrvAddr: 218.2.99.139:16176
+    namesrvAddr: 218.2.99.139:16181
     instanceName: SYSCTLGROUPNAME
     maxMessageSize: 131072
     sendMsgTimeout: 2000
